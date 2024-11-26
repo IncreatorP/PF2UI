@@ -12,7 +12,10 @@ const values = {};
 // Initialize and add event listeners
 fields.forEach(field => {
   values[field.id] = field.value;
-  field.addEventListener('focus', () => field.select());
+
+  field.addEventListener('focus', () => {
+    if (field.tagName === 'INPUT') field.select();
+  });
 
   field.addEventListener('input', event => {
     values[event.target.id] = event.target.value || event.target.defaultValue;
@@ -33,7 +36,7 @@ container.addEventListener('keydown', event => {
     });
 
     lastName = newElement["name"];
-    lastProfile = newElement["type"];
+    lastProfile = newElement["type"]; // Remember the last used profile
     elements.push(newElement);
 
     resetFormAfterEntry();
@@ -49,19 +52,31 @@ function displayElementsList() {
     const entry = document.createElement('div');
     entry.classList.add('entry');
 
-    const content = document.createElement('div');
-    content.classList.add('content');
-    content.textContent = `#${index + 1}: ${Object.entries(el).map(([k, v]) => `${k}: ${v}`).join(', ')}`;
+    // Create a bubble for each value
+    Object.values(el).forEach((value, index) => {
+      const bubble = document.createElement('div');
 
-    const deleteButton = document.createElement('button');
-    deleteButton.classList.add('delete');
-    deleteButton.textContent = 'X';
-    deleteButton.addEventListener('click', () => {
+      bubble.textContent = value;
+    
+      // Check the current element number (index starts at 0)
+      if (index > 1) {
+        bubble.classList.add('bubble-number');
+      } else {
+        bubble.classList.add('bubble');        
+      }
+    
+      entry.appendChild(bubble);
+    });
+    // Add delete button as a bubble
+      const deleteButton = document.createElement('div');
+      deleteButton.classList.add('bubble');
+      deleteButton.classList.add('delete');
+      deleteButton.textContent = 'X';
+      deleteButton.addEventListener('click', () => {
       elements.splice(index, 1); // Remove the element from the array
       displayElementsList(); // Refresh the display
     });
 
-    entry.appendChild(content);
     entry.appendChild(deleteButton);
     elementsList.appendChild(entry);
   });
@@ -73,7 +88,10 @@ function resetFormAfterEntry() {
       field.value = lastName;
       field.focus();
     } else if (field.id === "profile") {
-      field.value = lastProfile;
+      if (field.value === "") { 
+        field.value = lastProfile; // Set the value programmatically
+        field.dispatchEvent(new Event('change')); // Trigger change event
+      }
     } else if (["textfield2", "textfield3", "textfield4"].includes(field.id)) {
       field.value = "0";
     } else if (field.id === "textfield5") {

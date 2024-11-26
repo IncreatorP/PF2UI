@@ -52,36 +52,65 @@ select {
   font-size: 16px;
   margin-top: 20px;
 }
-
 #elements-list {
   margin-top: 20px;
-  font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 15px; /* Space between rows */
 }
 
+/* Entry row container */
 .entry {
   display: flex;
-  justify-content: space-between;
+  gap: 4px; /* Space between value bubbles */
   align-items: center;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  font-size: 14px;
 }
 
-.entry .content {
-  flex-grow: 1;
-  margin-right: 10px;
+/* Individual value bubble */
+.bubble {
+  min-width: 128px;
+  padding: 10px 10px;
+  border: 2px solid #ccc;
+  border-radius: 1px;
+  background-color: #f2fbf5;
+  display: inline-block;
+  font-size: 18px;
+  white-space: nowrap;
+}
+.bubble-number {
+  min-width: 32px;
+  padding: 10px 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-image: linear-gradient(to bottom, #ffffff, #f9f9f9, #ffffff, #ffffff, #ffffff);
+  display: inline-block;
+  font-size: 18px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.bubble.delete {
+  min-width: 20px;
+  padding: 10px 10px;
+  border: 2px solid #651818;
+  border-radius: 32px;
+  background-color: #705a5a;
+  display: inline-block;
+  font-size: 16px;
+  white-space: nowrap;
 }
 
 .entry .delete {
   color: red;
   cursor: pointer;
+  text-align: center;
   font-weight: bold;
-  border: none;
   background: none;
   font-size: 16px;
 }
+
+body {
+  font-family: Arial, sans-serif; 
+  font-size: 16px; 
+}
+

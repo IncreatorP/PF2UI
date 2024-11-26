@@ -43,11 +43,29 @@ container.addEventListener('keydown', event => {
 
 // Display the list of elements
 function displayElementsList() {
-  elementsList.innerHTML = elements
-    .map((el, index) => `#${index + 1}: ${Object.entries(el).map(([k, v]) => `${k}: ${v}`).join(', ')}`)
-    .join('<br>');
-}
+  elementsList.innerHTML = ''; // Clear the list
 
+  elements.forEach((el, index) => {
+    const entry = document.createElement('div');
+    entry.classList.add('entry');
+
+    const content = document.createElement('div');
+    content.classList.add('content');
+    content.textContent = `#${index + 1}: ${Object.entries(el).map(([k, v]) => `${k}: ${v}`).join(', ')}`;
+
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('delete');
+    deleteButton.textContent = 'X';
+    deleteButton.addEventListener('click', () => {
+      elements.splice(index, 1); // Remove the element from the array
+      displayElementsList(); // Refresh the display
+    });
+
+    entry.appendChild(content);
+    entry.appendChild(deleteButton);
+    elementsList.appendChild(entry);
+  });
+}
 // Reset form after entry
 function resetFormAfterEntry() {
   fields.forEach(field => {

@@ -6,6 +6,13 @@ let elements = []; // List of entered elements
 let lastName = "Detail"; // Default Name
 let lastProfile = "slat"; // Default Profile
 
+const translations = {
+  slat: { en: "Slat", et: "Liist" },
+  sheet: { en: "Sheet", et: "Leht" },
+  "l-profile": { en: "L-profile", et: "L-profiil" },
+};
+
+
 // Store current values
 const values = {};
 
@@ -22,6 +29,14 @@ fields.forEach(field => {
     outputDiv.innerText = Object.values(values).join(', ');
   });
 });
+
+document.getElementById("language-select").addEventListener("change", event => {
+  populateDropdown(event.target.value); // Populate dropdown based on selected language
+});
+
+// Initialize with a default language
+populateDropdown("en");
+
 
 // Submission logic
 container.addEventListener('keydown', event => {
@@ -69,8 +84,7 @@ function displayElementsList() {
     });
     // Add delete button as a bubble
       const deleteButton = document.createElement('div');
-      deleteButton.classList.add('bubble');
-      deleteButton.classList.add('delete');
+      deleteButton.classList.add('bubble-delete');
       deleteButton.textContent = 'X';
       deleteButton.addEventListener('click', () => {
       elements.splice(index, 1); // Remove the element from the array
@@ -97,5 +111,17 @@ function resetFormAfterEntry() {
     } else if (field.id === "textfield5") {
       field.value = "1";
     }
+  });
+}
+
+function populateDropdown(language) {
+  const dropdown = document.getElementById("profile");
+  dropdown.innerHTML = ""; // Clear existing options
+
+  Object.keys(translations).forEach(key => {
+    const option = document.createElement("option");
+    option.value = key;
+    option.textContent = translations[key][language]; // Get the label for the current language
+    dropdown.appendChild(option);
   });
 }

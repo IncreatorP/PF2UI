@@ -1,11 +1,12 @@
 #entry-container {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  width: 800px;
+  width: 600px;
   border: 1px solid black;
-  margin-left: 1vw;
+  margin-left: 50vw;
   margin-top: 3vh;
   padding: 10px; 
   overflow: hidden; 
+  translate: -50%;
 }
 
 #myForm {
@@ -37,7 +38,7 @@ input {
 }
 
 input.wide {
-   width: 150px;
+   width: 200px;
 }
 
 select {
@@ -56,13 +57,15 @@ select {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Space between rows */
+  gap: 2px;
 }
 
 /* Entry row container */
 .entry {
+  resize:horizontal;
   display: flex;
-  gap: 4px; /* Space between value bubbles */
+  border: 1px solid rgb(26, 26, 26);
+  gap: 1px; /* Space between value bubbles */
   align-items: center;
 }
 
@@ -89,12 +92,15 @@ select {
   white-space: nowrap;
 }
 
-.bubble.delete {
+.bubble-delete {
   min-width: 20px;
   padding: 10px 10px;
   border: 2px solid #651818;
+  text-align: center;
+  color: white;
+  font-weight: 800;
   border-radius: 32px;
-  background-color: #705a5a;
+  background-image: linear-gradient(to bottom, rgba(248,80,50,1) 0%,rgba(241,111,92,1) 50%,rgba(246,41,12,1) 51%,rgba(240,47,23,1) 71%,rgba(231,56,39,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   display: inline-block;
   font-size: 16px;
   white-space: nowrap;

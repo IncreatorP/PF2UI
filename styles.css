@@ -1,0 +1,59 @@
+#entry-container {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  width: 800px;
+  border: 1px solid black;
+  margin-left: 1vw;
+  margin-top: 3vh;
+  padding: 10px; 
+  overflow: hidden; 
+}
+
+#myForm {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap; 
+}
+
+.form-group {
+  display: flex;
+  width: 64px auto;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+input {
+  padding: 4px;            
+  font-size: 14px;         
+  width: 64px;            
+  min-width: 64px;         
+  max-width: 300px;        
+  box-sizing: border-box;  
+  overflow: hidden;        
+}
+
+input.wide {
+   width: 150px;
+}
+
+select {
+  padding: 4px;         
+  font-size: 14px;       
+  width: 96px;          
+  min-width: 64px;       
+  box-sizing: border-box; 
+}
+
+#output {
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+#elements-list {
+  margin-top: 20px;
+  font-family: monospace;
+}
